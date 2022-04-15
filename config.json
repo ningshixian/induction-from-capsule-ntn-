@@ -1,0 +1,59 @@
+{
+    "exp": {
+      "name": "lvq_config"
+    },
+    "data_loader": {
+      "name": "lvq_data_loader.LVQDataLoader",
+      "train_file": "datasets/train_noise.csv",
+      "test_file1": "datasets/test_acc.csv",
+      "test_file2": "datasets/test_robust.csv",
+      "cls_num_file": "cls_num.txt",
+      "maxlen": 64
+    },
+    "model":{
+      "name": "lvq_model.LVQ2",
+      "root": "../corpus/longforBERT_v4.1",
+      "backup_bert": [
+          "../corpus/chinese_L-12_H-768_A-12",
+          "../corpus/chinese_wwm_ext_L-12_H-768_A-12",
+          "../corpus/chinese_simbert_L-12_H-768_A-12",
+          "../corpus/longforBERT_v3.1",
+          "../corpus/longforBERT_v3.0",
+          "../corpus/longforBERT_v4.1",
+          "../corpus/longforBERT_v4.2_simcse"
+      ],
+      "dropout_rate": 0.3,
+      "learning_rate": 2e-5,
+      "scale": 30,
+      "margin": 0.15,
+      "optimizer": "adam"
+    },
+    "trainer":{
+      "name": "lvq_trainer.LVQTrainer",
+      "lr": 0.01,
+      "max_iter": 16000,
+      "delta": 1e-3,
+      "epsilon": 0.2,
+      "verbose_training": true,
+      "prediction_file": "prediction.txt"
+    },
+    "apollo":{
+      "APOLLO_HOST": "http://apolloconfig.longfor.sit",
+      "APPID": "aicare",
+      "CLUSTER": "sit",
+      "TOKEN": "4324dcafc46201ce85772250b583050df8f37de1",
+      "DECRYPT_HOST": "http://api.longfor.sit/gaia-decryptconfig-service-sit/decryptconfig",
+      "API_KEY": "26f577d6-1d6c-48d8-b355-5029337c2c69",
+  
+      "_source_intent": "NLU@归#纳$层%结^果&"
+    },
+    "callbacks":{
+      "checkpoint_monitor": "val_loss",
+      "checkpoint_mode": "min",
+      "checkpoint_save_best_only": true,
+     "checkpoint_save_weights_only": true,
+      "checkpoint_verbose": true,
+      "tensorboard_write_graph": true
+    }
+  }
+  
